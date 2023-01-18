@@ -1,0 +1,42 @@
+{
+  "name": "desafio_5",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha",
+    "axios-test": "node testing/pruebas/axios.js",
+    "start": "nodemon ./src/server/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.20",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.3"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "axios": "^1.2.2",
+    "autocannon": "^7.10.0",
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.0",
+    "compression": "^1.7.4",
+    "connect-mongo": "^4.6.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.6",
+    "express-session": "^1.17.3",
+    "firebase-admin": "^11.0.1",
+    "knex": "^2.3.0",
+    "log4js": "^6.7.0",
+    "mongoose": "^6.7.0",
+    "normalizr": "^3.6.2",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "socket.io": "^4.5.3"
+  }
+}

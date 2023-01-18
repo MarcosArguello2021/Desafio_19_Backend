@@ -1,0 +1,46 @@
+[
+  {
+    "author": {
+      "id": "arguello@protonmail.ch",
+      "nombre": "Marcos",
+      "apellido": "Argüello",
+      "edad": "38",
+      "alias": "marck1984",
+      "avatar": "https://cdn-icons-png.flaticon.com/512/147/147144.png"
+    },
+    "mensaje": "Un mensaje"
+  },
+  {
+    "author": {
+      "id": "arguello@proton.me",
+      "nombre": "Nicolas",
+      "apellido": "Argüello",
+      "edad": "31",
+      "alias": "nico31",
+      "avatar": "https://cdn-icons-png.flaticon.com/512/147/147144.png"
+    },
+    "mensaje": "Segundo mensaje"
+  },
+  {
+    "author": {
+      "id": "marck@gmail.com",
+      "nombre": "Sebastian",
+      "apellido": "Argüello",
+      "edad": "35",
+      "alias": "seba35",
+      "avatar": "https://cdn-icons-png.flaticon.com/512/147/147142.png"
+    },
+    "mensaje": "Tercer mensaje"
+  },
+  {
+    "author": {
+      "id": "crmdzasjuan.ti@inta.gob.ar",
+      "nombre": "Facundo",
+      "apellido": "Argüello",
+      "edad": "22",
+      "alias": "facu21",
+      "avatar": "https://toppng.com/uploads/preview/avatar-png-11554021819gij72acuim.png"
+    },
+    "mensaje": "Cuarto"
+  }
+]
