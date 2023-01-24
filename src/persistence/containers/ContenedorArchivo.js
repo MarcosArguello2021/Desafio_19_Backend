@@ -83,6 +83,7 @@ export class ContenedorArchivo{
             objs[index] = elem
             try {
                 await fs.writeFile(this.fileData, JSON.stringify(objs, null, 2))
+                return objs[index].id
             } catch (error) {
                 throw new Error(`Error al actualizar: ${error}`)
             }

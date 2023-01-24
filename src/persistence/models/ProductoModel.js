@@ -18,7 +18,7 @@ const productosSchema = Schema({
         type: String,
         required: true
     }, 
-    id: {
+    code: {
         type: Number,
         required: true
     }, 
@@ -27,7 +27,7 @@ const productosSchema = Schema({
         required: true
     }
 },{
-    timestamps: true,
+    timestamps: false,
     versionKey: false
 })
 

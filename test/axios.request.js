@@ -30,7 +30,7 @@ export const postProduct = async () => {
 }
   try {
     const  { status, data } = await axios.post(
-      "http://localhost:3000/api/products",
+      "http://localhost:3000/api/productos",
       datos
     );
 
@@ -40,19 +40,20 @@ export const postProduct = async () => {
   }
 };
 
-export const updateProduct = async (id, datos) => {
+export const updateProduct = async (id) => {
+  const datos = {
+    name: "axios prod",
+    price: 123,
+    urlImage: "axios image",
+    description: "axios description",
+    code: 123,
+    stock: 200
+}
+
   try {
-    const  { status, data }  = await axios({
-      method: "put",
-      url: `http://localhost:3000/api/productos/${id}`,
-      data: datos,
-      // data: {
-      // title: "Nuevo nombre de producto",
-      // price: 100,
-      // thumbnail: "",
-      // stock: 0,
-      // },
-    });
+    const  { status, data }  = await axios.put(`http://localhost:3000/api/productos/${id}`,
+      datos
+    );
     return  { status, data } ;
   } catch (err) {
     console.error(err);
@@ -60,7 +61,6 @@ export const updateProduct = async (id, datos) => {
 };
 
 export const deleteProduct = async (id) => {
-
   try {
     const  { status, data }  = await axios.delete(
       `http://localhost:3000/api/productos/${id}`

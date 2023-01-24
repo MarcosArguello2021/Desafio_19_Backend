@@ -1,0 +1,22 @@
+query {
+  getProductos {
+    _id
+    name
+    price
+  }
+}
+
+mutation {
+  guardarProducto(datos: {
+    name: "Teclado graphql",
+    price: 10000,
+    urlImage: "Teclado graphql",
+    description: "Teclado graphql",
+    code: 123,
+    stock: 12
+  }) {
+    _id
+    name
+    price
+  }
+}

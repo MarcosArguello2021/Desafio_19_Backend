@@ -6,88 +6,89 @@ import { auth } from '../controllers/userController.js'
 
 await mongoose.connect(config.mongodb.cnxStr, config.mongodb.options);
 
-export const getProductById = async(req, res) =>{  // Esta funcion devuelve un producto segun su ID o devuelve todos
+export const getProductById = async(req, res) =>{  
     const { id } = req.params
+
     try {
         if (!id) {
             const productos = await Productos.find()
-            res.status(200).send(productos)
+            res.json(productos)
         } else {
-            const product = await Productos.find({ id: id })
+            const product = await Productos.find({ _id: id })
             if (product.length==0) {
-                res.status(400).json({ error: 'producto no encontrado' })
+                res.json({ error: 'producto no encontrado' })
             } else {
-                res.status(200).send(product)
+                res.json(product)
             }
         }
 
     } catch (error) {
-        res.status(400).json({ error: `${error}` })
+        res.json({ error: `${error}` })
     }
 }
 
-export const saveProduct = async(req, res) =>{      // Guarda un prodcuto nuevo
-    if (auth) {
-        const { name, price, urlImage, description, id, stock } = req.body
+export const saveProduct = async(req, res) =>{      
+    // if (auth) {
+        const { name, price, urlImage, description, code, stock } = req.body
 
-        if (!name || !price || !urlImage || !description || !id || !stock) {
-            res.status(400).json({ error: 'por favor ingrese todos los datos del producto' })
+        if (!name || !price || !urlImage || !description || !code || !stock) {
+            res.json({ error: 'por favor ingrese todos los datos del producto' })
         } else {
 
             const product = req.body
             try {
                 await Productos.insertMany(product)
-                res.status(200).json({ messaje: 'producto guardado con exito' })
+                res.json({ messaje: 'producto guardado con exito' })
             } catch (error) {
-                res.status(400).json({ error: `${error}` })
+                res.json({ error: `${error}` })
             }
         }
-    } else {
-        res.status(400).json({ messaje: 'usted no tiene permisos para consultar esta url' })
-    }
+    // } else {
+    //     res.status(400).json({ messaje: 'usted no tiene permisos para consultar esta url' })
+    // }
 }
 
-export const updateProductByID = async(req, res) =>{  // Recibe y actualiza un producto según su id.
-    if (auth) {
-        const { idParam } = req.params                                                                   // Tomamos el ID
-        const { name, price, urlImage, description, id, stock } = req.body                        // Tomamos el cuerpo
+export const updateProductByID = async(req, res) =>{ 
+    // if (auth) {
+        const { id } = req.params                                                              
+        const { name, price, urlImage, description, code, stock } = req.body  
 
-        if (!name || !price || !urlImage || !description || !id || !stock) {                    // Comprobamos que el cuerpo este completo
-            res.status(400).json({ error: 'por favor ingrese todos los datos del producto' })
+        if (!name || !price || !urlImage || !description || !code || !stock) {                    
+            res.json({ error: 'por favor ingrese todos los datos del producto' })
         } else {
             try {
-                const product = await Productos.findById(idParam)
+                const product = await Productos.findOne({ "_id": id })
                 if (product) {
-                    product[0].name = name
-                    product[0].price = price
-                    product[0].urlImage = urlImage
-                    product[0].description = description
-                    product[0].id = id
-                    product[0].stock = stock
-                    await Productos.save(product[0])
-                    res.status(200).json({ messaje: 'producto actualizado con exito' })
+                    product.name = name
+                    product.price = price
+                    product.urlImage = urlImage
+                    product.description = description
+                    product.code = code
+                    product.stock = stock
+                    await Productos.replaceOne({ "_id": id }, product)
+                    res.json({ messaje: 'producto actualizado con exito' })
                 } else {
-                    res.status(400).json({ error: 'producto no encontrado' })
+                    res.json({ error: 'producto no encontrado' })
                 }
             } catch (error) {
-                res.status(400).json({ error: `${error}` })
+                res.json({ error: `${error}` })
             }
         }
-    } else {
-        res.status(400).json({ messaje: 'usted no tiene permisos para consultar esta url' })
-    }
+    // } else {
+    //     res.status(400).json({ messaje: 'usted no tiene permisos para consultar esta url' })
+    // }
 }
 
-export const  deleteProductById = async(req, res) =>{  // Esta funcion elimina un producto segun su ID
-    if (auth) {
-        const { id } = req.params
+export const  deleteProductById = async(req, res) =>{  
+    const { id } = req.params 
+    // if (auth) {
         try {
-            await Productos.deleteOne({ id: id })
-            res.status(200).json({ messaje: 'producto borrado con exito' })
+            await Productos.deleteOne({ _id: id })
+            res.json({ messaje: 'producto borrado con exito' })
         } catch (error) {
-            res.status(400).json({ error: `${error}` })
+            res.json({ error: `${error}` })
         }
-    } else {
-        res.status(400).json({ messaje: 'usted no tiene permisos para consultar esta url' })
-    }
+    // } else {
+    //     res.status(400).json({ messaje: 'usted no tiene permisos para consultar esta url' })
+    // }
 }

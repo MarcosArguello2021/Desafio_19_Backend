@@ -1,6 +1,7 @@
 import userRouter from '../router/userRoutes.js';
 import productosRoutes from '../router/productosRoutes.js';
 import numerosRouter from '../router/random.js';
+import graphqlRouter from '../router/graphqlRouter.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import express from 'express';
@@ -56,9 +57,11 @@ app.get('/', auth, async (req, res) => {
 })
 estadoCompresion(process.argv[5])
 
+app.use('/api', graphqlRouter);
 app.use('/api', userRouter);
 app.use('/api', productosRoutes);
 app.use('/api', numerosRouter);
+
 app.use((req, res) => {
   logger.warn('Error de ruta - No encontrada')
   res.status(404).render('failRoute')
